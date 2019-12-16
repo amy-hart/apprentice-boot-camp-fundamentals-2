@@ -15,7 +15,7 @@ public class Game {
             if(rolls[i] == 10){
                 if(i == 10) {
                     score += 10;
-                } else() {
+                } else {
                     score += 10 + rolls[i+1] + rolls[i+2];
                     i -= 1;
                 }
