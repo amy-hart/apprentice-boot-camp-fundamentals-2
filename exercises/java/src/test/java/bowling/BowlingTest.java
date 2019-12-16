@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BowlingTest {
     public Game game;
 
@@ -11,6 +14,27 @@ public class BowlingTest {
     public void setup() {
         game = new Game();
     }
+
+    @Test
+    public void convertRollsToFramesWithNoStrikes() {
+
+    }
+
+    @Test
+    public void convertRollsToFramesWithOneStrike() {
+
+    }
+
+    @Test
+    public void convertRollsToFramesWithTwoStrikes() {
+
+    }
+
+    @Test
+    public void convertRollsToFramesWithBackToBackStrikes() {
+
+    }
+
 
     @Test
     public void scoreWhenRollsAllEqualZero() {
@@ -41,6 +65,30 @@ public class BowlingTest {
 
         int[] rolls = {1,1, 7,3, 1,1, 1,1, 1,1, 7,3, 1,1, 1,1, 1,1, 1,1};
 
-        Assertions.assertThat(game.score(rolls)).isEqualTo(20);
+        Assertions.assertThat(game.score(rolls)).isEqualTo(38);
+    }
+
+    @Test
+    public void scoreWhenRollsContainsTwoSparesBackToBack() {
+
+        int[] rolls = {7,3, 7,3, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1};
+
+        Assertions.assertThat(game.score(rolls)).isEqualTo(44);
+    }
+
+    @Test
+    public void scoreWhenRollsContainsOneStrike() {
+
+        int[] rolls = {1,1, 10, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1};
+
+        Assertions.assertThat(game.score(rolls)).isEqualTo(30);
+    }
+
+    @Test
+    public void scoreWhenRollsContainsOneStrikeInLastFrame() {
+
+        int[] rolls = {1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 1,1};
+
+        Assertions.assertThat(game.score(rolls)).isEqualTo(30);
     }
 }
