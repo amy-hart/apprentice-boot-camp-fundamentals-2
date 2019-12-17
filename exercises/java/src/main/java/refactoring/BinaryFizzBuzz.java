@@ -5,31 +5,32 @@ import java.nio.charset.StandardCharsets;
 
 class BinaryFizzBuzz {
 
-    private int index;
-    private int numberUnderTest;
-    private int arrayLength = new int[]{0, 0, 0, 0, 0}.length;
+    public static final int FIZZ_BUZZ_LIMIT = Byte.MAX_VALUE - 27;
+    public static final int THREE = 0b11;
+    public static final int FIVE = new int[]{0, 0, 0, 0, 0}.length;
+
+    private int Iterator;
+    private int FizzCounter;
+    private int buzzCounter = FIVE;
 
     String FizzBuzzIterator() {
 
         String result = "";
 
-        // While index is less than MAX VALUE - 27
-        for (; index < Byte.MAX_VALUE - 27; index++) {
-            // Append outcome of method B to string
-            result += FizzBuzzPrinter(index) + " ";
+        for (; Iterator < FIZZ_BUZZ_LIMIT; Iterator++) {
+            result += FizzBuzzPrinter(Iterator) + " ";
         }
 
-        // Return the string with the last character chopped off?
         return result.substring(0, result.length() - 1);
     }
 
     private String FizzBuzzPrinter(int number) {
 
-        numberUnderTest++;
-        arrayLength--;
+        FizzCounter++;
+        buzzCounter--;
 
-        boolean multipleOfThree = numberUnderTest == 0b11;
-        boolean multipleOfFive = arrayLength == 0;
+        boolean multipleOfThree = FizzCounter == THREE;
+        boolean multipleOfFive = buzzCounter == 0;
 
         String string = multipleOfThree || multipleOfFive ? "" : String.valueOf(number + 1);
 
@@ -45,12 +46,12 @@ class BinaryFizzBuzz {
     }
 
     private String Buzz() {
-        arrayLength = new int[]{0, 0, 0, 0, 0}.length;
+        buzzCounter = FIVE;
         return new String(DatatypeConverter.parseHexBinary("42757a7a"), StandardCharsets.UTF_8);
     }
 
     private String Fizz() {
-        numberUnderTest = 0;
+        FizzCounter = 0;
         return new String(DatatypeConverter.parseHexBinary("46697a7a"), StandardCharsets.UTF_8);
     }
 }
