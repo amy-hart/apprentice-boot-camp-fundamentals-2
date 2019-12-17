@@ -13,45 +13,59 @@ class BinaryFizzBuzz {
     private int FizzCounter;
     private int buzzCounter = FIVE;
 
-    String FizzBuzzIterator() {
+    String fizzBuzzIterator() {
 
-        String result = "";
+        String FizzBuzzOutput = "";
 
         for (; Iterator < FIZZ_BUZZ_LIMIT; Iterator++) {
-            result += FizzBuzzPrinter(Iterator) + " ";
+            FizzBuzzOutput += fizzBuzzCalculator(Iterator) + " ";
         }
 
+        return trimLastChar(FizzBuzzOutput);
+    }
+
+    private String trimLastChar(String result) {
         return result.substring(0, result.length() - 1);
     }
 
-    private String FizzBuzzPrinter(int number) {
+    private String fizzBuzzCalculator(int number) {
 
         FizzCounter++;
         buzzCounter--;
 
-        boolean multipleOfThree = FizzCounter == THREE;
-        boolean multipleOfFive = buzzCounter == 0;
+        String string = isMultipleOfThree() || isMultipleOfFive() ? "" : String.valueOf(number + 1);
 
-        String string = multipleOfThree || multipleOfFive ? "" : String.valueOf(number + 1);
+        if(isMultipleOfThree()){
+            string += fizz();
+        }
 
-        if(multipleOfThree){
-            string += Fizz();
-        };
-
-        if(multipleOfFive){
-            string += Buzz();
+        if(isMultipleOfFive()){
+            string += buzz();
         }
 
         return string;
     }
 
-    private String Buzz() {
-        buzzCounter = FIVE;
-        return new String(DatatypeConverter.parseHexBinary("42757a7a"), StandardCharsets.UTF_8);
+    private boolean isMultipleOfFive() {
+        return buzzCounter == 0;
     }
 
-    private String Fizz() {
-        FizzCounter = 0;
-        return new String(DatatypeConverter.parseHexBinary("46697a7a"), StandardCharsets.UTF_8);
+    private boolean isMultipleOfThree() {
+        return FizzCounter == THREE;
     }
+
+    private String buzz() {
+        buzzCounter = FIVE;
+        return parseHexBinary("42757a7a");
+    }
+
+    private String fizz() {
+        FizzCounter = 0;
+        return parseHexBinary("46697a7a");
+    }
+
+    private String parseHexBinary(String s) {
+        return new String(DatatypeConverter.parseHexBinary(s), StandardCharsets.UTF_8);
+    }
+
 }
